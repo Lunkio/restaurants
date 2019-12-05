@@ -1,0 +1,272 @@
+:root {
+  --peach: #FEDCD2;
+  --powder: #BFD8D2;
+  --warm: #DF744A;
+  --lemon: #DCB239;
+}
+
+body {
+  background-color: #F5F5F5;
+  font-family: 'Domine', serif !important;
+}
+
+/* These are Language styles */
+.language {
+  display: flex;
+}
+
+.country-name {
+  margin-right: 1rem;
+  display: flex;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  display: flex;
+}
+
+.flag {
+  width: 1.2rem;
+  align-self: center;
+  margin-left: 0.2rem;
+  cursor: pointer;
+}
+
+@media (max-width: 425px) {
+  .language {
+    margin-bottom: 1rem;
+  }
+}
+/* Language ends here */
+
+/* These are GoogleMap styles */
+.map {
+  height: 35rem;
+  width: 100%;
+  position: relative;
+  margin: auto;
+}
+
+.header {
+  text-align: center;
+}
+
+.searchbar {
+  margin-bottom: 1rem;
+}
+
+.found-restaurants-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 100;
+  width: 50%;
+  height: 50%;
+  overflow: scroll;
+  scrollbar-width: none; /* hides scrollbar in firefox */
+}
+
+/* hides scrollbar in chrome */
+.found-restaurants-container::-webkit-scrollbar {
+  display: none;
+}
+
+.found-restaurants {
+  background-color: white;
+}
+
+.found-restaurants p {
+  padding: 1rem;
+  margin-bottom: 0rem;
+  cursor: pointer;
+}
+
+.found-restaurants p:hover {
+  background-color: #F5F5F5;
+}
+
+.divider {
+  margin: 0rem;
+}
+
+.clickedBtn {
+  background-color: greenyellow !important;
+  padding: 0.3rem;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.notClickedBtn {
+  background-color: #CCDFCB !important;
+  padding: 0.3rem;
+  margin: 0.2rem 0.5rem 0rem 0rem;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.notClickedBtn:hover {
+  background-color: rgb(152, 228, 148) !important;
+}
+
+.btn-icons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.description-button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.origin-icons-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  font-weight: 1000;
+  margin-bottom: -0.5rem;
+}
+
+.origin {
+  font-weight: 1000;
+  margin-bottom: 0.2rem;
+}
+
+.all-icons {
+  display: flex;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.icons img {
+  width: 20px;
+  margin-right: 0.3rem;
+}
+
+.icon-text {
+  font-size: 0.9rem;
+}
+
+.restaurant-info p {
+  margin-bottom: 0.2rem;
+}
+
+@media (max-width: 1024px) {
+  .icon-text {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .upper-part {
+    margin: auto;
+    width: 80%;
+  }
+
+  .map{
+    width: 80%;
+  }
+
+  .description-button-container {
+    margin-bottom: 0.7rem;
+  }
+
+  .description {
+    margin-bottom: -0.9rem;
+  }
+
+  .origin {
+    margin-bottom: -0.7rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .upper-part {
+    margin: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .icons {
+    margin-right: 0.4rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .icons {
+    margin-right: 0.2rem;
+  }
+
+  .icons img {
+    margin-right: 0.2rem;
+  }
+
+  .icon-text {
+    font-size: 0.6rem;
+  }
+}
+/* GoogleMap ends here */
+
+/* These are Login styles */
+  .button-container {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+  }
+
+  .button-container .btn {
+    width: 6rem;
+  }
+
+  .button-container .btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+  }
+/* Login ends here */
+
+/* These are RestaurantAdd styles */
+.add-button {
+  margin-bottom: 1rem;
+}
+/* RestaurantAdd ends here */
+
+/* These are RestaurantModify styles */
+#search {
+  margin-bottom: 1rem;
+}
+
+.modifyHeader {
+  display: flex;
+  align-items: center;
+}
+
+.modifyHeader .close-button {
+  align-self: flex-start;
+  margin-left: 1rem;
+}
+
+.edit-button {
+  padding: 0.1rem !important;
+  margin-left: 1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  width: 4rem;
+}
+
+.modify-delete-buttons {
+  margin-bottom: 1rem;
+}
+
+#modify {
+  margin-right: 5rem;
+}
+/* RestaurantModify ends here */
