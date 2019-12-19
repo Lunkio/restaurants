@@ -1,20 +1,19 @@
 ## What is this application?
 
-This application utilizes Google Maps -api and shows every single restaurant in the city of Helsinki, capital of Finland.
-Restaurants can be filtered based on from what origin of their meat is. For example, if filter 'cow' -meat is enabled,
-all the markers in the map will show the origin of that meat in the current restaurant.
+This application utilizes Google Maps -API and shows every single restaurant in the city of Helsinki, capital of Finland.
+Application takes its restaurant-location data from MyHelsinki Open API, and implements this data to Google Maps -API.
+Restaurants can be filtered by the origin of their meat. For example, if filter 'cow' -meat is enabled, a customized marker indicates the origin of that restaurant's meat and the location of the restaurant on the map.
 
 ### `The purpose of this application`
 
-In Finland, restaurants must provide the information of the origin of the meat they are selling.
+In Finland, restaurants must provide the information on the country of origin of the meat that they are selling.
 However, currently many restaurants are not presenting this information clearly enough, thus this service was made.
 
-### `Where does the data come from?`
+### `Where does the origin-data come from?`
 
 At the moment, the only way to receive the data for the origin of the restaurant's meat is to contact the restaurant itself.
-This is an ongoing process and in time the data will be more complete.
+This is an ongoing process and in time the data will be more complete. Application includes a section, where this meat -data can be modified at any time.
 
-### `How was this app made?`
+### `Challenges`
 
-Application takes its restaurant-location data from myHelsinki Open Api. Before implementing this data to Google Maps -api,
-restaurant's data is completed with a new 'meat-origin' property, which can be easily modified later inside the app's admin -section.
+MyHelsinki Open API does not provide any information about restaurants’ food. Before sending this data from the API to the MongoDB -database, it needed to be completed with new properties about the origin of restaurant’s meat, which is essential part of this application. This was done looping through the data of every restaurant and adding new meat attributes and setting a default value of ‘unknown’. This value can easily be modified later inside the application, featuring token-based authentication to be possible only for the registered and logged in admin-user.
