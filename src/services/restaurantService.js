@@ -9,32 +9,32 @@ const setToken = newToken => {
 }
 
 const getAll = async () => {
-    const response = await axios.get(baseUrl)
-    return response.data
+    const result = await axios.get(baseUrl)
+    return result.data
 }
 
 const add = async (restaurant) => {
     const config = {
         headers: { Authorization: token }
     }
-    const response = await axios.post(`${baseUrl}`, restaurant, config)
-    return response
+    const result = await axios.post(`${baseUrl}`, restaurant, config)
+    return result
 }
 
 const modify = async (meat, restaurantId) => {
     const config = {
         headers: { Authorization: token }
     }
-    const response = await axios.put(`${baseUrl}/${restaurantId}`, meat, config)
-    return response
+    const result = await axios.put(`${baseUrl}/${restaurantId}`, meat, config)
+    return result
 }
 
 const remove = async (id) => {
     const config = {
         headers: { Authorization: token }
     }
-    const response = await axios.delete(`${baseUrl}/${id}`, config)
-    return response
+    const result = await axios.delete(`${baseUrl}/${id}`, config)
+    return result
 }
 
 export default { getAll, add, modify, remove, setToken }

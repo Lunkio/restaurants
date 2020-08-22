@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import restaurantService from '../../services/restaurantService'
 
-const RestaurantModify = ({ restaurants, token }) => {
+const RestaurantModify = ({ token }) => {
+    const restaurants = useSelector(state => state.restaurants)
     const [showEdit, setShowEdit] = useState(false)
     const [searchValue, setSearchValue] = useState('')
     const [restaurant, setRestaurant] = useState(null)
@@ -93,20 +95,27 @@ const RestaurantModify = ({ restaurants, token }) => {
                         window.alert('Meat modified successfully!')
                         window.location.reload()
                     } else {
-                        window.alert('OOOOPS something went wrong')
+                        window.alert('Error, restaurant not added')
                     }
+                })
+                .catch(error => {
+                    window.alert('Something went wrong, check internet connection')
+                    console.log('error', error)
                 })
         }
 
         const deleteRestaurant = async (id) => {
             if (window.confirm(`Delete ${restaurant.name.fi}?`)) {
                 restaurantService.setToken(token)
-                await restaurantService.remove(id)
-                window.alert(`Deleted!`)
-                window.location.reload()
-            } else {
-                return
-            }            
+                try {
+                    await restaurantService.remove(id)
+                    window.alert(`Deleted!`)
+                    window.location.reload()
+                } catch (e) {
+                    console.log('error', e)
+                    window.alert('Restaurant not deleted, try again')
+                }
+            }
         }
 
         return (

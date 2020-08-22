@@ -1,6 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-const Websites = ({restaurants}) => {
+const Websites = () => {
+    const restaurants = useSelector(state => state.restaurants)
+
     return (
         <div>
             <h1>Websites</h1>

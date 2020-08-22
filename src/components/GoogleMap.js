@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
 
 const GoogleMap = (props) => {
+    const restaurants = useSelector(state => state.restaurants)
+    const lang = useSelector(state => state.language)
+
     //shows restaurant-info when clicking marker or searching restaurant
     const [showingInfoWindow, setShowingInfoWindow] = useState(false)
     //sets the specific restaurant-info for infowindow
@@ -19,8 +23,8 @@ const GoogleMap = (props) => {
 
     // Without this, when you search the first time search for a restaurant, it won't show the infowindow
     useEffect(() => {
-        setSelectedPlace(props.restaurants[0])
-    }, [props.restaurants])
+        setSelectedPlace(restaurants[0])
+    }, [restaurants])
 
     const icons = ['/suomi.png', '/eu.png', '/nonEu.png', '/unknown.png']
     let icon = icons[0]
@@ -38,8 +42,8 @@ const GoogleMap = (props) => {
         setShowingInfoWindow(true)
     }
 
-    let allRestaurants = props.restaurants
-    const filteredRestaurants = props.restaurants.filter(r => r.name.fi.toLowerCase().includes(searchValue))
+    let allRestaurants = restaurants
+    const filteredRestaurants = restaurants.filter(r => r.name.fi.toLowerCase().includes(searchValue))
     //console.log('filtered', filteredRestaurants.length)
 
     //function when clicking a specific restaurant in the search results
@@ -59,7 +63,7 @@ const GoogleMap = (props) => {
     }
     if (searchValue.length < searchValueLength) {
         allRestaurants = []
-        allRestaurants = props.restaurants
+        allRestaurants = restaurants
         setSearchResultRestaurant(null)
         setSearchValueLength(0)
     }
@@ -119,11 +123,15 @@ const GoogleMap = (props) => {
         <div className='container'>
             <div className='upper-part'>
                 <div>
-                    <h1 className='header'>Lihakartta</h1>
+                    <h1 className='header'>
+                        {lang === 'fin' ? ('Lihakartta') : ('Meat Map')}
+                    </h1>
                 </div>
                 <hr />
                 <div className='searchbar'>
-                    <p style={{'marginBottom': '0rem', 'fontWeight': '1000'}}>Etsi ravintola:</p>
+                    <p style={{'marginBottom': '0rem', 'fontWeight': '1000'}}>
+                        {lang === 'fin' ? ('Etsi ravintola:') : ('Find Restaurant:')}
+                    </p>
                     <input 
                         className='form-control'
                         type='text'
@@ -131,7 +139,7 @@ const GoogleMap = (props) => {
                         value={searchValue.toLowerCase()}
                         onChange={e => setSearchValue(e.target.value)}
                     />
-                    {filteredRestaurants.length !== 0 && filteredRestaurants.length < props.restaurants.length && 
+                    {filteredRestaurants.length !== 0 && filteredRestaurants.length < restaurants.length && 
                         <div className='found-restaurants-container'>{filteredRestaurants.map(r => {
                                 return (
                                     <div className='found-restaurants' onClick={() => searchResult(r)} key={r.id}>
@@ -145,32 +153,32 @@ const GoogleMap = (props) => {
                 <div className='btn-icons-container row'>
                     <div className='description-button-container col-lg-6 col-md-12 col-sm-12'>
                         <div className='description'>
-                            <p>Valitse näytettävä liha:</p>
+                            <p>{lang === 'fin' ? ('Valitse näytettävä liha:') : ('Select meat to be displayed:')}</p>
                         </div>
                         <div className='buttons'>
-                            <button className={btnClassCow} onClick={() => setMeatSelector('cow')}>Nauta <img src='/cow.svg' style={{width: '1rem'}} alt='cow'/></button>
-                            <button className={btnClassPork} onClick={() => setMeatSelector('pork')}>Sika <img src='/pig.svg' style={{width: '1rem'}} alt='pig'/></button>
-                            <button className={btnClassChicken} onClick={() => setMeatSelector('chicken')}>Kana <img src='/chicken.svg' style={{width: '1rem'}} alt='chicken'/></button>
-                            <button className={btnClassLamb} onClick={() => setMeatSelector('lamb')}>Lammas <img src='/sheep.svg' style={{width: '1rem'}} alt='lamb'/></button>
-                            <button className={btnClassGoat} onClick={() => setMeatSelector('goat')}>Vuohi <img src='/goat.svg' style={{width: '1rem'}} alt='goat'/></button>
+                            <button className={btnClassCow} onClick={() => setMeatSelector('cow')}>{lang === 'fin' ? ('Nauta ') : ('Cow ')}<img src='/cow.svg' style={{width: '1rem'}} alt='cow'/></button>
+                            <button className={btnClassPork} onClick={() => setMeatSelector('pork')}>{lang === 'fin' ? ('Sika ') : ('Pork ')}<img src='/pig.svg' style={{width: '1rem'}} alt='pig'/></button>
+                            <button className={btnClassChicken} onClick={() => setMeatSelector('chicken')}>{lang === 'fin' ? ('Kana ') : ('Chicken ')}<img src='/chicken.svg' style={{width: '1rem'}} alt='chicken'/></button>
+                            <button className={btnClassLamb} onClick={() => setMeatSelector('lamb')}>{lang === 'fin' ? ('Lammas ') : ('Lamb ')}<img src='/sheep.svg' style={{width: '1rem'}} alt='lamb'/></button>
+                            <button className={btnClassGoat} onClick={() => setMeatSelector('goat')}>{lang === 'fin' ? ('Vuohi ') : ('Goat ')}<img src='/goat.svg' style={{width: '1rem'}} alt='goat'/></button>
                         </div>
                     </div>
                     <div className='origin-icons-container col-lg-6 col-md-12 col-sm-12'>
                         <div className='origin'>
-                            <p>Lihan alkuperä:</p>
+                            <p>{lang === 'fin' ? ('Lihan alkuperä:') : ('Origin of meat:')}</p>
                         </div>
                         <div className='all-icons'>
                             <div className='icons'>
-                                <img src={icons[0]} alt='suomi' /><span className='icon-text'>Kotimainen</span>
+                                <img src={icons[0]} alt='suomi' /><span className='icon-text'>{lang === 'fin' ? ('Kotimainen') : ('Finnish')}</span>
                             </div>
                             <div className='icons'>
-                                <img src={icons[1]} alt='eu' /><span className='icon-text'>EU-alueella</span>
+                                <img src={icons[1]} alt='eu' /><span className='icon-text'>{lang === 'fin' ? ('EU-alueella') : ('EU area')}</span>
                             </div>
                             <div className='icons'>
-                                <img src={icons[2]} alt='noneu' /><span className='icon-text'>EU:n ulkopuolella</span>
+                                <img src={icons[2]} alt='noneu' /><span className='icon-text'>{lang === 'fin' ? ('EU:n ulkopuolella') : ('Outside EU')}</span>
                             </div>
                             <div className='icons'>
-                                <img src={icons[3]} alt='unknown' /><span className='icon-text'>Ei tiedossa</span>
+                                <img src={icons[3]} alt='unknown' /><span className='icon-text'>{lang === 'fin' ? ('Ei tiedossa') : ('Not known')}</span>
                             </div>
                         </div>
                     </div>
@@ -270,11 +278,11 @@ const GoogleMap = (props) => {
                                 <h5>{selectedPlace.name.fi}</h5>
                                 {/* <p><i>{selectedPlace.description.body}</i></p> */}
                                 <hr />
-                                <p>Nauta, alkuperämaa: <strong>{selectedPlace.meat.cow.origin}</strong></p>
-                                <p>Sika, alkuperämaa: <strong>{selectedPlace.meat.pork.origin}</strong></p>
-                                <p>Kana, alkuperämaa: <strong>{selectedPlace.meat.chicken.origin}</strong></p>
-                                <p>Lammas, alkuperämaa: <strong>{selectedPlace.meat.lamb.origin}</strong></p>
-                                <p>Vuohi, alkuperämaa: <strong>{selectedPlace.meat.goat.origin}</strong></p>
+                                <p>{lang === 'fin' ? ('Nauta, alkuperämaa: ') : ('Cow, country of origin: ')}<strong>{selectedPlace.meat.cow.origin}</strong></p>
+                                <p>{lang === 'fin' ? ('Sika, alkuperämaa: ') : ('Pork, country of origin: ')}<strong>{selectedPlace.meat.pork.origin}</strong></p>
+                                <p>{lang === 'fin' ? ('Kana, alkuperämaa: ') : ('Chicken, country of origin: ')}<strong>{selectedPlace.meat.chicken.origin}</strong></p>
+                                <p>{lang === 'fin' ? ('Lammas, alkuperämaa: ') : ('Lamb, country of origin: ')}<strong>{selectedPlace.meat.lamb.origin}</strong></p>
+                                <p>{lang === 'fin' ? ('Vuohi, alkuperämaa: ') : ('Goat, country of origin: ')}<strong>{selectedPlace.meat.goat.origin}</strong></p>
                             </div>
                         </InfoWindow>
                     )}

@@ -24,6 +24,7 @@ body {
   text-decoration: none;
   color: black;
   display: flex;
+  cursor: pointer;
 }
 
 .flag {
@@ -270,3 +271,8 @@ body {
   margin-right: 5rem;
 }
 /* RestaurantModify ends here */
+
+.disclaimer {
+  font-size: 0.7rem;
+  margin-top: 1rem;
+}

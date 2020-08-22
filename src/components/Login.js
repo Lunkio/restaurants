@@ -5,7 +5,7 @@ import RestaurantAdd from './RestaurantControl/RestaurantAdd'
 import RestaurantModify from './RestaurantControl/RestaurantModify'
 import Websites from './RestaurantControl/Websites'
 
-const Login = ({ restaurants }) => {
+const Login = () => {
     const [admin, setAdmin] = useState(null)
     const [token, setToken] = useState(null)
 
@@ -36,8 +36,8 @@ const Login = ({ restaurants }) => {
             window.localStorage.setItem(
                 'loggedAdmin', JSON.stringify(admin)
             )
-        } catch (exception) {
-            //console.log('login failed')
+        } catch (e) {
+            console.log('error', e)
             window.alert('Login failed')
         }
     }
@@ -104,8 +104,8 @@ const Login = ({ restaurants }) => {
                     <button className='btn btn-primary' onClick={() => setWebsite()}>Websites</button>
                 </div><hr />
                 {admin !== null && addRestaurant && <RestaurantAdd token={token} /> }
-                {admin !== null && modifyRestaurant && <RestaurantModify restaurants={restaurants} token={token} />}
-                {admin !== null && websites && <Websites restaurants={restaurants} />}
+                {admin !== null && modifyRestaurant && <RestaurantModify token={token} />}
+                {admin !== null && websites && <Websites />}
             </div>
         )
     }

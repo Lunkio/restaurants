@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import restaurantService from '../../services/restaurantService'
 // import dataBase from '../../db.json'
 
-const RestaurantAdd = (props) => {
+const RestaurantAdd = ({ token }) => {
     const [cow, setCow] = useState('unknown')
     const [pork, setPork] = useState('unknown')
     const [chicken, setChicken] = useState('unknown')
@@ -96,16 +96,19 @@ const RestaurantAdd = (props) => {
             }
         }
         
-        restaurantService.setToken(props.token)
+        restaurantService.setToken(token)
         restaurantService.add(newRestaurant)
             .then(result => {
-                //console.log('thenin result', result)
                 if (result.status === 200) {
                     window.alert('Restaurant added successfully!')
                     window.location.reload()
                 } else {
-                    window.alert('OOOOPS something went wrong')
+                    window.alert('Error, restaurant not added')
                 }
+            })
+            .catch(error => {
+                window.alert('Something went wrong, check internet connection')
+                console.log('error', error)
             })
     }
 

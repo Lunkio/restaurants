@@ -1,3 +1,5 @@
+import restaurantService from '../services/restaurantService'
+
 const restaurantReducer = (state = [], action) => {
     switch (action.type) {
         case 'INITIAL_RESTAURANTS':
@@ -7,10 +9,13 @@ const restaurantReducer = (state = [], action) => {
     }
 }
 
-export const initializeRestaurants = (restaurants) => {
-    return {
-        type: 'INITIAL_RESTAURANTS',
-        data: restaurants
+export const initializeRestaurants = () => {
+    return async dispatch => {
+        const restaurants = await restaurantService.getAll();
+        dispatch({
+            type: 'INITIAL_RESTAURANTS',
+            data: restaurants
+        })
     }
 }
 
